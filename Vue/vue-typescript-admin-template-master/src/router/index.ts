@@ -184,6 +184,12 @@ export const asyncRoutes: RouteConfig[] = [
   {
     path: '/icon',
     component: Layout,
+    meta: {
+      title: 'icons',
+      icon: 'icon',
+      roles: ['SIMPLE'],
+      noCache: true
+    },
     children: [
       {
         path: 'index',
@@ -247,6 +253,11 @@ export const asyncRoutes: RouteConfig[] = [
   {
     path: '/tab',
     component: Layout,
+    meta: {
+      title: 'tab',
+      roles: ['SIMPLE'],
+      icon: 'tab'
+    },
     children: [
       {
         path: 'index',
@@ -294,6 +305,11 @@ export const asyncRoutes: RouteConfig[] = [
     path: '/error-log',
     component: Layout,
     redirect: 'noredirect',
+    meta: {
+      title: 'errorLog',
+      roles: ['SIMPLE'],
+      icon: 'bug'
+    },
     children: [
       {
         path: 'log',
@@ -366,6 +382,12 @@ export const asyncRoutes: RouteConfig[] = [
     path: '/pdf',
     component: Layout,
     redirect: '/pdf/index',
+    meta: {
+      title: 'pdf',
+      roles: ['SIMPLE'],
+      icon: 'pdf',
+      alwaysShow: true // will always show the root menu
+    },
     children: [
       {
         path: 'index',
@@ -405,6 +427,11 @@ export const asyncRoutes: RouteConfig[] = [
     path: '/clipboard',
     component: Layout,
     redirect: 'noredirect',
+    meta: {
+      title: 'clipboard',
+      roles: ['SIMPLE'],
+      icon: 'clipboard'
+    },
     children: [
       {
         path: 'index',

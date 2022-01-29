@@ -135,6 +135,7 @@ export const asyncRoutes = [
         meta: {
           title: 'icons',
           icon: 'icon',
+          roles: ['editor'],
           noCache: true
         }
       }
@@ -531,6 +532,12 @@ export const asyncRoutes = [
     path: '/pdf',
     component: 'Layout',
     redirect: '/pdf/index',
+    meta: {
+      title: 'pdf',
+      icon: 'pdf',
+      roles: ['SIMPLE'],
+      alwaysShow: true
+    },
     children: [
       {
         path: 'index',
@@ -575,7 +582,8 @@ export const asyncRoutes = [
         name: 'Clipboard',
         meta: {
           title: 'clipboard',
-          icon: 'clipboard'
+          icon: 'clipboard',
+          roles: ['editor']
         }
       }
     ]
