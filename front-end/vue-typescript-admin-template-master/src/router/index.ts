@@ -150,7 +150,7 @@ export const asyncRoutes: RouteConfig[] = [
     meta: {
       title: 'permission',
       icon: 'lock',
-      roles: ['ADMIN', 'EDITOR'], // you can set roles in root nav
+      roles: ['ADMIN'], // you can set roles in root nav
       alwaysShow: true // will always show the root menu
     },
     children: [
@@ -168,7 +168,8 @@ export const asyncRoutes: RouteConfig[] = [
         component: () => import(/* webpackChunkName: "permission-directive" */ '@/views/permission/directive.vue'),
         name: 'DirectivePermission',
         meta: {
-          title: 'directivePermission'
+          title: 'directivePermission',
+          roles: ['ADMIN'] // or you can only set roles in sub nav
           // if do not set roles, means: this page does not require permission
         }
       },
@@ -184,39 +185,14 @@ export const asyncRoutes: RouteConfig[] = [
     ]
   },
   {
-    path: '/appdesign',
-    component: Layout,
-    redirect: '/appdesign/list',
-    meta: {
-      title: 'appdesign',
-      icon: 'example',
-      roles: ['ADMIN', 'EDITOR'], // you can set roles in root nav
-      alwaysShow: true // will always show the root menu
-    },
-    children: [
-      {
-        path: '/relatedesign',
-        component: () => import(/* webpackChunkName: "relatedesign" */ '@/views/appdesign/list.vue'),
-        name: 'relatedesign',
-        meta: {
-          title: 'relatedesign',
-          icon: 'icon'
-        }
-      },
-      {
-        path: '/catalogdesign',
-        component: () => import('@/views/appdesign/catalog.vue'),
-        name: 'catalogdesign',
-        meta: {
-          title: 'catalogdesign',
-          icon: 'icon'
-        }
-      }
-    ]
-  },
-  {
     path: '/icon',
     component: Layout,
+    meta: {
+      title: 'permission',
+      icon: 'lock',
+      roles: ['SIMPLE'], // you can set roles in root nav
+      alwaysShow: true // will always show the root menu
+    },
     children: [
       {
         path: 'index',
@@ -225,7 +201,8 @@ export const asyncRoutes: RouteConfig[] = [
         meta: {
           title: 'icons',
           icon: 'icon',
-          noCache: true
+          noCache: true,
+          roles: ['SIMPLE'] // you can set roles in root nav
         }
       }
     ]
@@ -241,6 +218,7 @@ export const asyncRoutes: RouteConfig[] = [
     redirect: '/example/list',
     meta: {
       title: 'example',
+      roles: ['SIMPLE'], // you can set roles in root nav
       icon: 'example'
     },
     children: [
@@ -285,7 +263,8 @@ export const asyncRoutes: RouteConfig[] = [
         name: 'Tab',
         meta: {
           title: 'tab',
-          icon: 'tab'
+          icon: 'tab',
+          roles: ['SIMPLE'] // you can set roles in root nav
         }
       }
     ]
