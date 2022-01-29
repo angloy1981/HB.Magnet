@@ -8,6 +8,7 @@ const chartsRouter: RouteConfig = {
   name: 'Charts',
   meta: {
     title: 'charts',
+    roles: ['SIMPLE'], // you can set roles in root nav
     icon: 'chart'
   },
   children: [

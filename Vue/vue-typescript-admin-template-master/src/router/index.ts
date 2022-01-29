@@ -150,7 +150,7 @@ export const asyncRoutes: RouteConfig[] = [
     meta: {
       title: 'permission',
       icon: 'lock',
-      roles: ['admin', 'editor'], // you can set roles in root nav
+      roles: ['admin','SIMPLE'], // you can set roles in root nav
       alwaysShow: true // will always show the root menu
     },
     children: [
@@ -159,8 +159,7 @@ export const asyncRoutes: RouteConfig[] = [
         component: () => import(/* webpackChunkName: "permission-page" */ '@/views/permission/page.vue'),
         name: 'PagePermission',
         meta: {
-          title: 'pagePermission',
-          roles: ['admin'] // or you can only set roles in sub nav
+          title: 'pagePermission'
         }
       },
       {
@@ -177,8 +176,7 @@ export const asyncRoutes: RouteConfig[] = [
         component: () => import(/* webpackChunkName: "permission-role" */ '@/views/permission/role.vue'),
         name: 'RolePermission',
         meta: {
-          title: 'rolePermission',
-          roles: ['admin']
+          title: 'rolePermission'
         }
       }
     ]
@@ -194,6 +192,7 @@ export const asyncRoutes: RouteConfig[] = [
         meta: {
           title: 'icons',
           icon: 'icon',
+          roles: ['SIMPLE'],
           noCache: true
         }
       }
@@ -210,7 +209,8 @@ export const asyncRoutes: RouteConfig[] = [
     redirect: '/example/list',
     meta: {
       title: 'example',
-      icon: 'example'
+      icon: 'example',
+      roles: ['SIMPLE']
     },
     children: [
       {
@@ -254,6 +254,7 @@ export const asyncRoutes: RouteConfig[] = [
         name: 'Tab',
         meta: {
           title: 'tab',
+          roles: ['SIMPLE'],
           icon: 'tab'
         }
       }
@@ -265,6 +266,7 @@ export const asyncRoutes: RouteConfig[] = [
     redirect: 'noredirect',
     meta: {
       title: 'errorPages',
+      roles: ['SIMPLE'],
       icon: '404'
     },
     children: [
@@ -299,6 +301,7 @@ export const asyncRoutes: RouteConfig[] = [
         name: 'ErrorLog',
         meta: {
           title: 'errorLog',
+          roles: ['SIMPLE'],
           icon: 'bug'
         }
       }
@@ -310,6 +313,7 @@ export const asyncRoutes: RouteConfig[] = [
     redirect: '/excel/export-excel',
     meta: {
       title: 'excel',
+      roles: ['SIMPLE'],
       icon: 'excel'
     },
     children: [
@@ -345,6 +349,7 @@ export const asyncRoutes: RouteConfig[] = [
     redirect: '/zip/download',
     meta: {
       title: 'zip',
+      roles: ['SIMPLE'],
       icon: 'zip',
       alwaysShow: true // will always show the root menu
     },
@@ -368,6 +373,7 @@ export const asyncRoutes: RouteConfig[] = [
         name: 'PDF',
         meta: {
           title: 'pdf',
+          roles: ['SIMPLE'],
           icon: 'pdf'
         }
       }
@@ -376,7 +382,8 @@ export const asyncRoutes: RouteConfig[] = [
   {
     path: '/pdf-download-example',
     component: () => import(/* webpackChunkName: "pdf-download-example" */ '@/views/pdf/download.vue'),
-    meta: { hidden: true }
+    meta: { hidden: true,
+      roles: ['SIMPLE'] }
   },
   {
     path: '/theme',
@@ -405,6 +412,7 @@ export const asyncRoutes: RouteConfig[] = [
         name: 'Clipboard',
         meta: {
           title: 'clipboard',
+          roles: ['SIMPLE'],
           icon: 'clipboard'
         }
       }
@@ -429,6 +437,7 @@ export const asyncRoutes: RouteConfig[] = [
     path: 'https://github.com/Armour/vue-typescript-admin-template',
     meta: {
       title: 'externalLink',
+      roles: ['SIMPLE'],
       icon: 'link'
     }
   },

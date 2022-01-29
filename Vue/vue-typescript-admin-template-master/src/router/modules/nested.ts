@@ -8,6 +8,7 @@ const nestedRoutes: RouteConfig = {
   name: 'Nested',
   meta: {
     title: 'nested',
+    roles: ['SIMPLE'], // you can set roles in root nav
     icon: 'nested'
   },
   children: [

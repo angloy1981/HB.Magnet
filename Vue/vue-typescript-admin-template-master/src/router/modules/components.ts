@@ -8,6 +8,7 @@ const componentsRouter: RouteConfig = {
   name: 'ComponentDemo',
   meta: {
     title: 'components',
+    roles: ['SIMPLE'], // you can set roles in root nav
     icon: 'component'
   },
   children: [

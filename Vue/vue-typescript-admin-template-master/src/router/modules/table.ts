@@ -8,6 +8,7 @@ const tableRoutes: RouteConfig = {
   name: 'Table',
   meta: {
     title: 'table',
+    roles: ['SIMPLE'], // you can set roles in root nav
     icon: 'table'
   },
   children: [
