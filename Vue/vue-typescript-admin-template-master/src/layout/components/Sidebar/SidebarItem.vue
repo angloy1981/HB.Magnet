@@ -17,9 +17,14 @@
             :name="theOnlyOneChild.meta.icon"
           />
           <span
-            v-if="theOnlyOneChild.meta.title"
+            v-if="theOnlyOneChild.meta.title && ( theOnlyOneChild.meta.translate == undefined || theOnlyOneChild.meta.translate == true )"
             slot="title"
-          >{{ $t('route.' + theOnlyOneChild.meta.title) }}</span>
+          >{{ $t('route.' + theOnlyOneChild.meta.title) }}
+          </span>
+          <span v-else
+            slot="title">
+          {{ theOnlyOneChild.meta.title }}
+          </span>
         </el-menu-item>
       </sidebar-item-link>
     </template>
@@ -34,9 +39,13 @@
           :name="item.meta.icon"
         />
         <span
-          v-if="item.meta && item.meta.title"
+          v-if="item.meta && item.meta.title && (item.meta.translate == undefined || item.meta.translate == true )"
           slot="title"
         >{{ $t('route.' + item.meta.title) }}</span>
+        <span v-else
+          slot="title"
+          >
+          {{item.meta.title}}</span>
       </template>
       <template v-if="item.children">
         <sidebar-item

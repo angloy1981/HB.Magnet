@@ -12,7 +12,9 @@ NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/login', '/auth-redirect']
 
-const getPageTitle = (key: string) => {
+const getPageTitle = (key: string, translate: boolean) => {
+  if(translate==false)
+    return key
   const hasKey = i18n.te(`route.${key}`)
   if (hasKey) {
     const pageName = i18n.t(`route.${key}`)
@@ -39,7 +41,7 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
           await UserModule.GetUserInfo()
           const roles = UserModule.roles
           // Generate accessible routes map based on role
-          PermissionModule.GenerateRoutes(roles)
+          await PermissionModule.GenerateRoutes(roles)
           // Dynamically add accessible routes
           PermissionModule.dynamicRoutes.forEach(route => {
             router.addRoute(route)
@@ -77,5 +79,5 @@ router.afterEach((to: Route) => {
   NProgress.done()
 
   // set page title
-  document.title = getPageTitle(to.meta.title)
+  document.title = getPageTitle(to.meta.title, to.meta.translate)
 })

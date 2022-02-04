@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
-export const getRoutes = () =>
+export const getRoutes = (pid: number) =>
   request({
-    url: '/routes/list',
+    url: `/services/app/Menus/List/${pid}`,
+    baseURL: 'http://localhost:21021/api',
     method: 'get'
   }).then(res=>{
       return {code: 20000, data: res.result}
@@ -10,20 +11,21 @@ export const getRoutes = () =>
 
 export const createRoute = (data: any) =>
   request({
-    url: '/route/create',
+    url: '/menus/create',
+    baseURL: 'http://localhost:21021/api',
     method: 'post',
     data
   })
 
 export const updateRoute = (id: number, data: any) =>
   request({
-    url: `/route/update/${id}`,
+    url: `/menus/update/${id}`,
     method: 'post',
     data
   })
 
 export const deleteRoute = (id: number) =>
   request({
-    url: `/route/delete/${id}`,
+    url: `/menus/delete/${id}`,
     method: 'get'
   })

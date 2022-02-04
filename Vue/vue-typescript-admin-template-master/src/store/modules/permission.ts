@@ -3,6 +3,9 @@ import { RouteConfig } from 'vue-router'
 import { asyncRoutes, constantRoutes } from '@/router'
 import store from '@/store'
 import { getRoutes } from '@/api/route'
+import { registerLayout } from 'echarts'
+/* Layout */
+import Layout from '@/layout/index.vue'
 
 //动态路由
 /**
@@ -34,15 +37,31 @@ import { getRoutes } from '@/api/route'
   // 具体内容根据自己的数据结构来定，这里需要注意的一点是
   // 原先routers写法是component: () => import('@/view/error-page/404.vue')
   // 经过json数据转换，这里会丢失，所以需要按照上面提过的做转换，下面只写了核心点，其他自行处理
-  let route = Object.assign({}, menu)
+  let route:any = {} //Object.assign({}, menu)
+  route.path = `/${menu.name}`
+  route.component = Layout
   // route.component = () => import(`/* webpackChunkName: ${menu.title} */'@/${menu.component}'`)\
  
   // 菜单配置的时候都是矢量图标库里面的图标所以要加上iconfont,ivew-admin里面都是默认的font-family：'Ionicons'=>转成 font-family:'iconfont'
   if(menu.meta){
+    route.meta = {}
     route.meta.icon = `iconfont ${menu.meta.icon}`
+    route.meta.title = menu.meta.title
+    route.meta.roles = menu.meta.roles
+    route.meta.translate = false
   } //矢量图标转划
-   
-  route.component  = () =>  import(`@/${menu.component}`);
+
+  // if(menu.component == "components/main"){
+  //   route.component = Main;  //一级菜单判断
+  // }
+  // else if(menu.component == "components/parentView"){
+  //   route.component = parentView; //二级菜单判断
+  // }
+  // else{
+  //   route.component  = () =>  import(`@/${menu.component}`);
+  // }
+
+  // route.component  = () =>  import(`@/${menu.component}`);
   
   return route
 }
@@ -87,7 +106,7 @@ class Permission extends VuexModule implements IPermissionState {
   }
 
   @Action({ rawError: true })
-  public GenerateRoutes(roles: string[]) {
+  public async GenerateRoutes(roles: string[]) {
     let accessedRoutes
     if (roles.includes('admin')) {
       accessedRoutes = asyncRoutes
@@ -95,13 +114,32 @@ class Permission extends VuexModule implements IPermissionState {
       accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
     }
     //生成customRoute
-    let data:any
-    getRoutes().then(res=>{ data = res.data })
-    let customRoute = backendMenusToRouters(data)
-    accessedRoutes.concat(filterAsyncRoutes(customRoute, roles))
-    
+    let menus:any
+    // getRoutes(0).then(res=>
+    // {
+    //   menus=res.data
+    // })
+    menus = await actiontest()
+    let customRoute = backendMenusToRouters(menus)
+    let filterRoutes = filterAsyncRoutes(customRoute, roles)
+    // accessedRoutes.concat(filterRoutes)
+    filterRoutes.forEach(m=>{
+      accessedRoutes.push(m)
+    })
+    // accessedRoutes.push(filterRoutes)
+    // accessedRoutes = filterAsyncRoutes(customRoute, roles)
+
     this.SET_ROUTES(accessedRoutes)
   }
 }
+const actiontest = async ()=>{
+  let menus:any
+  await getRoutes(0).then(res=>
+    {
+      menus=res.data
+    })
+
+  return menus
+} 
 
 export const PermissionModule = getModule(Permission)
