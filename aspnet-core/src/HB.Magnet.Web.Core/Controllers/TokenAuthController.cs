@@ -48,7 +48,25 @@ namespace HB.Magnet.Controllers
             _externalAuthManager = externalAuthManager;
             _userRegistrationManager = userRegistrationManager;
         }
+        [HttpPost]
+        public async Task<AuthenticateResultModel> Authenticate1([FromForm] AuthenticateModel1 model)
+        {
+            var loginResult = await GetLoginResultAsync(
+                model.UserName,
+                model.Password,
+                GetTenancyNameOrNull()
+            );
 
+            var accessToken = CreateAccessToken(CreateJwtClaims(loginResult.Identity));
+
+            return new AuthenticateResultModel
+            {
+                AccessToken = accessToken,
+                EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
+                ExpireInSeconds = (int)_configuration.Expiration.TotalSeconds,
+                UserId = loginResult.User.Id
+            };
+        }
         [HttpPost]
         public async Task<AuthenticateResultModel> Authenticate([FromBody] AuthenticateModel model)
         {

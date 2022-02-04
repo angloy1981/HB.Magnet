@@ -35,9 +35,13 @@ export const deleteUser = (username: string) =>
 
 export const login = (data: any) =>
   request({
-    url: '/users/login',
+    url: '/TokenAuth/Authenticate1',
+    baseURL: 'http://localhost:21021/api',
     method: 'post',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     data
+  }).then(res => {
+    return { code: '20000', data: res.result }
   })
 
 export const logout = () =>

@@ -7,3 +7,4 @@ bin/
 aspnet-core/src/HB.Magnet.Web.Host/App_Data/Logs/
 aspnet-core/src/HB.Magnet.Web.Mvc/App_Data/Logs/
 aspnet-core/src/HB.Magnet.Migrator/Logs/Logs.txt
+node_modules

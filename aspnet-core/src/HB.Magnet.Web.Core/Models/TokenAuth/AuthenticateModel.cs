@@ -17,4 +17,15 @@ namespace HB.Magnet.Models.TokenAuth
 
         public bool RememberClient { get; set; }
     }
+    public class AuthenticateModel1
+    {
+        [Required]
+        [StringLength(AbpUserBase.MaxEmailAddressLength)]
+        public string UserName { get; set; }
+
+        [Required]
+        [StringLength(AbpUserBase.MaxPlainPasswordLength)]
+        [DisableAuditing]
+        public string Password { get; set; }
+    }
 }
